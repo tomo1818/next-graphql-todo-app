@@ -3,9 +3,9 @@
 
 
 type Mutation {
-  createTask(title: String!): Task!
+  createTask(priority: Int!, title: String!): Task!
   deleteTask(id: Int!): Task!
-  updateTask(done: Boolean!, id: Int!, title: String!): Task!
+  updateTask(done: Boolean!, id: Int!, priority: Int!, title: String!): Task!
 }
 
 type Query {
@@ -15,5 +15,6 @@ type Query {
 type Task {
   done: Boolean!
   id: Int!
+  priority: Int!
   title: String!
 }

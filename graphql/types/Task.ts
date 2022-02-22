@@ -6,6 +6,7 @@ export const Task = objectType({
     t.nonNull.int('id')
     t.nonNull.string('title')
     t.nonNull.boolean('done')
+    t.nonNull.int('priority')
   },
 })
 
@@ -28,11 +29,13 @@ export const CreateTaskMutation = extendType({
       type: 'Task',
       args: {
         title: nonNull(stringArg()),
+        priority: nonNull(intArg()),
       },
       resolve(_parent, args, ctx) {
         return ctx.prisma.task.create({
           data: {
             title: args.title,
+            priority: args.priority,
           },
         })
       },
@@ -68,6 +71,7 @@ export const UpdateTaskMutation = extendType({
         id: nonNull(intArg()),
         title: nonNull(stringArg()),
         done: nonNull(booleanArg()),
+        priority: nonNull(intArg()),
       },
       resolve(_parent, args, ctx) {
         return ctx.prisma.task.update({
@@ -76,7 +80,8 @@ export const UpdateTaskMutation = extendType({
           },
           data: {
             title: args.title,
-            done: args.done
+            done: args.done,
+            priority: args.priority
           },
         })
       }
